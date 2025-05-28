@@ -96,7 +96,7 @@
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-1">Alamat</h4>
-                                <p class="text-gray-600">Jl. Kuliner Nusantara No. 123, Kecamatan Lezat, Kota Rasa, Indonesia</p>
+                                <p class="text-gray-600">Jl. Permata Bumi, Kecamatan Arcamanik, Kelurahan Cisaranten Kulon, Kota Bandung, Indonesia</p>
                             </div>
                         </div>
                         
@@ -106,30 +106,17 @@
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-1">Telepon</h4>
-                                <p class="text-gray-600">+62 812 3456 7890</p>
-                                <p class="text-gray-600">+62 898 7654 3210</p>
+                                <p class="text-gray-600">+62 856-9496-5298</p>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-start mb-6">
                             <div class="text-orange-600 mr-4 mt-1">
-                                <i class="fas fa-envelope text-2xl"></i>
+                                <i class="fas fa-phone-alt text-2xl"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800 mb-1">Email</h4>
-                                <p class="text-gray-600">info@kateringnusantara.com</p>
-                                <p class="text-gray-600">order@kateringnusantara.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="text-orange-600 mr-4 mt-1">
-                                <i class="fas fa-clock text-2xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800 mb-1">Jam Operasional</h4>
-                                <p class="text-gray-600">Senin - Sabtu: 08.00 - 18.00</p>
-                                <p class="text-gray-600">Minggu: 09.00 - 15.00</p>
+                                <h4 class="font-semibold text-gray-800 mb-1">Instagram</h4>
+                                <p class="text-gray-600">@raoz_kitchen</p>
                             </div>
                         </div>
                     </div>

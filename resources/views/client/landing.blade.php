@@ -8,7 +8,7 @@
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Katering Lezat untuk Acara Spesial Anda</h1>
                 <p class="text-gray-600 text-lg mb-8">Jadikan acara Anda lebih berkesan dengan sajian kuliner tradisional dan modern yang lezat, sehat, dan berkualitas.</p>
                 <div class="flex space-x-4">
-                    <a href="#pesan" class="bg-orange-600 text-white px-8 py-3 rounded-full font-medium hover:bg-orange-700 transition duration-300">Pesan Sekarang</a>
+                    <a href="{{ route('menu') }}" class="bg-orange-600 text-white px-8 py-3 rounded-full font-medium hover:bg-orange-700 transition duration-300">Pesan Sekarang</a>
                     <a href="#kontak" class="border border-orange-600 text-orange-600 px-8 py-3 rounded-full font-medium hover:bg-orange-100 transition duration-300">Hubungi Kami</a>
                 </div>
             </div>
@@ -62,7 +62,7 @@
             <p class="text-lg mb-8 max-w-2xl mx-auto">Hubungi kami sekarang untuk mendapatkan penawaran terbaik dan konsultasi menu yang sesuai dengan acara Anda.</p>
             <div class="flex flex-col md:flex-row justify-center gap-4">
                 <a href="#kontak" class="bg-white text-orange-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition duration-300">Hubungi Kami</a>
-                <a href="/menu" class="border-2 border-white text-white px-8 py-3 rounded-full font-medium hover:bg-orange-700 transition duration-300">Lihat Menu</a>
+                <a href="{{ route('menu') }}" class="border-2 border-white text-white px-8 py-3 rounded-full font-medium hover:bg-orange-700 transition duration-300">Lihat Menu</a>
             </div>
         </div>
     </section>

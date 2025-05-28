@@ -11,7 +11,6 @@
         </div>
         
         <!-- Menu Mingguan Section -->
-        <!-- Menu Mingguan Section -->
         <section class="mb-12">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-2xl font-bold text-gray-800">Batch Mingguan</h2>

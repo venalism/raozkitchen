@@ -7,15 +7,12 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
 use App\Filament\Resources\MenuHarianResource\Pages;
-use App\Filament\Resources\MenuHarianResource\RelationManagers;
 use App\Models\MenuHarian;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class MenuHarianResource extends Resource
 {
@@ -27,18 +24,30 @@ class MenuHarianResource extends Resource
     {
         return $form
             ->schema([
+                // Relasi Jadwal Menu
                 Select::make('jadwal_menu_id')
-                ->relationship('jadwalMenu', 'nama_jadwal')
-                ->required()
-                ->label('Jadwal Menu'),
+                    ->relationship('jadwalMenu', 'nama_jadwal')
+                    ->required()
+                    ->label('Jadwal Menu')
+                    ->searchable()
+                    ->preload()
+                    ->helperText('Pilih jadwal menu yang sudah ada'),
 
+                // Kolom untuk Hari
                 TextInput::make('hari')
                     ->required()
-                    ->label('Hari (ex: Senin, Selasa, dll)'),
+                    ->label('Hari (ex: Senin, Selasa, dll)')
+                    ->helperText('Masukkan hari yang sesuai dalam format bahasa Indonesia, misalnya Senin, Selasa, dll.')
+                    ->maxLength(20)
+                    ->required(),
 
+                // Kolom untuk Tanggal
                 DatePicker::make('tanggal')
                     ->required()
-                    ->label('Tanggal'),
+                    ->label('Tanggal')
+                    ->helperText('Pilih tanggal untuk menu harian')
+                    ->minDate(now()) // Menjamin hanya tanggal hari ini atau yang akan datang
+                    ->date(),
             ]);
     }
 
@@ -46,13 +55,32 @@ class MenuHarianResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id'),
-                TextColumn::make('jadwalMenu.nama_jadwal')->label('Jadwal'),
-                TextColumn::make('hari'),
-                TextColumn::make('tanggal')->label('tanggal')->date(),
+                // ID Menu Harian
+                TextColumn::make('id')
+                    ->sortable()
+                    ->label('ID')
+                    ->searchable(),
+
+                // Nama Jadwal Menu yang Dihubungkan
+                TextColumn::make('jadwalMenu.nama_jadwal')
+                    ->label('Jadwal')
+                    ->sortable()
+                    ->searchable(),
+
+                // Menampilkan Hari
+                TextColumn::make('hari')
+                    ->sortable()
+                    ->label('Hari')
+                    ->searchable(),
+
+                // Tanggal Menu Harian
+                TextColumn::make('tanggal')
+                    ->label('Tanggal')
+                    ->sortable()
+                    ->date('d/m/Y'), // Format tanggal dd/mm/yyyy
             ])
-            ->filters([
-                //
+            ->filters([ 
+                // Jika perlu, filter bisa ditambahkan di sini
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -67,7 +95,7 @@ class MenuHarianResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            // Jika ada relasi tambahan, bisa ditambahkan di sini
         ];
     }
 

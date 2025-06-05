@@ -111,25 +111,6 @@
                 </div>
             </div>
         </div>
-        
-        <div class="text-center bg-gray-50 p-8 rounded-lg shadow-sm">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Hubungi Kami</h2>
-            <p class="text-gray-700 mb-6">Kami siap melayani kebutuhan katering Anda. Jangan ragu untuk menghubungi kami melalui:</p>
-            <div class="flex justify-center gap-4 mb-6">
-                <a href="tel:+6281234567890" class="bg-orange-600 text-white px-6 py-3 rounded-full font-medium hover:bg-orange-700 transition duration-300 flex items-center">
-                    <i class="fas fa-phone-alt mr-2"></i> 0812-3456-7890
-                </a>
-                <a href="https://wa.me/6281234567890" class="bg-green-600 text-white px-6 py-3 rounded-full font-medium hover:bg-green-700 transition duration-300 flex items-center">
-                    <i class="fab fa-whatsapp mr-2"></i> WhatsApp
-                </a>
-            </div>
-            <p class="text-gray-700 mb-2">atau kunjungi kami di:</p>
-            <div class="text-gray-700">
-                <p class="font-medium">Jl. Mawar No. 10, Perumahan Bunga Indah</p>
-                <p>Kota Semarang, Jawa Tengah</p>
-                <p class="mt-2"><span class="font-medium">Buka:</span> Senin-Sabtu, 08.00-17.00 WIB</p>
-            </div>
-        </div>
     </div>
 </div>
 @endsection

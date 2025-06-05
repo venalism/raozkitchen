@@ -17,8 +17,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class JadwalMenuResource extends Resource
 {
@@ -29,60 +27,98 @@ class JadwalMenuResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-        ->schema([
-            TextInput::make('nama_jadwal')->required(),
-            DatePicker::make('tanggal_mulai')->required(),
-            DatePicker::make('tanggal_selesai')->required(),
-    
-            FileUpload::make('poster_url')
-                ->label('Upload Poster')
-                ->directory('posters')
-                ->image()
-                ->hint('Boleh diupload untuk pemindaian OCR (opsional)'),
-    
-            Repeater::make('menuHarians')
-                ->relationship()
-                ->label('Menu Harian')
-                ->schema([
-                    TextInput::make('hari')->required(),
-                    DatePicker::make('tanggal')->required(),
-    
-                    Repeater::make('produkMenus')
-                        ->relationship()
-                        ->label('Produk Menu')
-                        ->schema([
-                            Select::make('produk_id')
-                                ->relationship('produk', 'nama_produk')
-                                ->searchable()
-                                ->preload()
-                                ->label('Produk')
-                                ->createOptionForm([
-                                    TextInput::make('nama_produk')->required(),
-                                    TextInput::make('satuan')->required(),
-                                    TextInput::make('harga_default')->numeric()->required(),
-                                    Textarea::make('keterangan'),
-                                    TextInput::make('jumlah_standar_unit')->numeric()->default(1),
-                                ]),
-    
-                            TextInput::make('harga_menu')->numeric()->required(),
-                            Textarea::make('keterangan_tambahan'),
-                        ])
-                ])
-        ]);
+            ->schema([
+                TextInput::make('nama_jadwal')
+                    ->required()
+                    ->maxLength(255)
+                    ->label('Nama Jadwal'),
+                
+                DatePicker::make('tanggal_mulai')
+                    ->required()
+                    ->label('Tanggal Mulai')
+                    ->minDate(now())
+                    ->helperText('Pilih tanggal mulai jadwal'),
+                
+                DatePicker::make('tanggal_selesai')
+                    ->required()
+                    ->label('Tanggal Selesai')
+                    ->after('tanggal_mulai')  // Tanggal selesai setelah tanggal mulai
+                    ->helperText('Pilih tanggal selesai jadwal'),
+
+                FileUpload::make('poster_url')
+                    ->label('Upload Poster')
+                    ->directory('posters')
+                    ->image()
+                    ->maxSize(1024)  // Maksimal ukuran file 1MB
+                    ->acceptedFileTypes(['image/jpeg', 'image/png']) // Validasi file yang diterima
+                    ->helperText('Upload poster gambar untuk jadwal menu'),
+
+                Repeater::make('menuHarians')
+                    ->relationship()
+                    ->label('Menu Harian')
+                    ->schema([
+                        TextInput::make('hari')
+                            ->required()
+                            ->label('Hari'),
+                        
+                        DatePicker::make('tanggal')
+                            ->required()
+                            ->label('Tanggal'),
+                        
+                        Repeater::make('produkMenus')
+                            ->relationship()
+                            ->label('Produk Menu')
+                            ->schema([
+                                Select::make('produk_id')
+                                    ->relationship('produk', 'nama_produk')
+                                    ->searchable()
+                                    ->preload()
+                                    ->label('Produk')
+                                    ->createOptionForm([
+                                        TextInput::make('nama_produk')->required(),
+                                        TextInput::make('satuan')->required(),
+                                        TextInput::make('harga_default')->numeric()->required(),
+                                        Textarea::make('keterangan'),
+                                        TextInput::make('jumlah_standar_unit')->numeric()->default(1),
+                                    ]),
+
+                                TextInput::make('harga_menu')
+                                    ->numeric()
+                                    ->required()
+                                    ->label('Harga Menu'),
+
+                                Textarea::make('keterangan_tambahan')
+                                    ->label('Keterangan Tambahan'),
+                            ]),
+                    ])
+            ]);
     }    
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('id'),
-                TextColumn::make('nama_jadwal')->searchable(),
-                TextColumn::make('tanggal_mulai')->label('Tanggal Mulai')->date(),
-                TextColumn::make('tanggal_selesai')->label('Tanggal Selesai')->date(),
-                TextColumn::make('user.name')->label('Dibuat oleh'),
+                TextColumn::make('id')
+                    ->label('ID')
+                    ->sortable(),
+                
+                TextColumn::make('nama_jadwal')
+                    ->searchable()
+                    ->label('Nama Jadwal'),
+                
+                TextColumn::make('tanggal_mulai')
+                    ->label('Tanggal Mulai')
+                    ->date(),
+                
+                TextColumn::make('tanggal_selesai')
+                    ->label('Tanggal Selesai')
+                    ->date(),
+                
+                TextColumn::make('user.name')
+                    ->label('Dibuat oleh'),
             ])
-            ->filters([
-                //
+            ->filters([ 
+                // Filter can be added here if needed in the future
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -97,7 +133,7 @@ class JadwalMenuResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            // Add any relations if needed
         ];
     }
 
